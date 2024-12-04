@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
 @Entity("usuarios")
 export class UserEntity {
@@ -19,4 +25,10 @@ export class UserEntity {
 
   @Column()
   status: string;
+
+  @CreateDateColumn({ name: "criado_em" })
+  criadoEm: Date;
+
+  @UpdateDateColumn({ name: "atualizado_em" })
+  atualizadoEm: Date;
 }

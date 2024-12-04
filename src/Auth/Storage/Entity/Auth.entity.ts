@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
 @Entity("auth")
 export class AuthEntity {
@@ -13,4 +19,10 @@ export class AuthEntity {
 
   @Column({ type: "uuid", unique: true })
   userId: string;
+
+  @CreateDateColumn({ name: "criado_em" })
+  criadoEm: Date;
+
+  @UpdateDateColumn({ name: "atualizado_em" })
+  atualizadoEm: Date;
 }
