@@ -1,0 +1,23 @@
+version: '2.0'
+
+services: 
+  api:
+    build: .
+    ports: 
+    - "3000:3000"
+    volumes: 
+      - .:/app
+      - /app/node_modules
+  
+  database:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # Necessário para configurar a senha do usuário root
+    ports:
+    - "3307:3306"
+       
+      
+
