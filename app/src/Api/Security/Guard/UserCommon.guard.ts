@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
-import { TypeEnum } from "src/user/Enums/TypeEnum";
+import { TypeEnum } from "src/User/Enums/TypeEnum";
 
 @Injectable()
 export class UserCommonGuard implements CanActivate {
