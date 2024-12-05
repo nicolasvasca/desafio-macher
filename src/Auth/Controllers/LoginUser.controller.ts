@@ -51,7 +51,7 @@ export class LoginUserController {
             params: req.params,
           },
           res: {
-            status: HttpStatus.CREATED,
+            status: HttpStatus.OK,
             data: response,
           },
         })
