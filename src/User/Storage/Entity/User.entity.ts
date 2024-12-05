@@ -27,8 +27,8 @@ export class UserEntity {
   status: string;
 
   @CreateDateColumn({ name: "criado_em" })
-  criadoEm: Date;
+  criado_em: Date;
 
   @UpdateDateColumn({ name: "atualizado_em" })
-  atualizadoEm: Date;
+  atualizado_em: Date;
 }

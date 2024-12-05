@@ -15,10 +15,10 @@ export class AuthEntity {
   login: string;
 
   @Column()
-  password: string;
+  senha: string;
 
-  @Column({ type: "uuid", unique: true })
-  userId: string;
+  @Column({ unique: true })
+  id_usuario: string;
 
   @CreateDateColumn({ name: "criado_em" })
   criadoEm: Date;

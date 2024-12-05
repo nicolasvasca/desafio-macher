@@ -1,28 +1,28 @@
 const BLACKLIST: Array<string> = [
-  '00000000000',
-  '11111111111',
-  '22222222222',
-  '33333333333',
-  '44444444444',
-  '55555555555',
-  '66666666666',
-  '77777777777',
-  '88888888888',
-  '99999999999',
-  '12345678909',
+  "00000000000",
+  "11111111111",
+  "22222222222",
+  "33333333333",
+  "44444444444",
+  "55555555555",
+  "66666666666",
+  "77777777777",
+  "88888888888",
+  "99999999999",
+  "12345678909",
 ];
 
 const STRICT_STRIP_REGEX = /[.-]/g;
 const LOOSE_STRIP_REGEX = /[^\d]/g;
 
 const verifierDigit = (digits: string): number => {
-  const numbers: Array<number> = digits.split('').map((number) => {
+  const numbers: Array<number> = digits.split("").map((number) => {
     return parseInt(number, 10);
   });
 
   const modulus: number = numbers.length + 1;
   const multiplied: Array<number> = numbers.map(
-    (number, index) => number * (modulus - index),
+    (number, index) => number * (modulus - index)
   );
   const mod: number =
     multiplied.reduce((buffer, number) => buffer + number) % 11;
@@ -30,13 +30,13 @@ const verifierDigit = (digits: string): number => {
   return mod < 2 ? 0 : 11 - mod;
 };
 
-const strip = (number: string, strict?: boolean): string => {
+const strip = (number: string | undefined | null, strict?: boolean): string => {
   const regex: RegExp = strict ? STRICT_STRIP_REGEX : LOOSE_STRIP_REGEX;
-  return (number || '').replace(regex, '');
+  return String(number || "").replace(regex, "");
 };
 
 const individualTaxIdFormat = (number: string): string => {
-  return strip(number).replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+  return strip(number).replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
 };
 
 const isValid = (number: string, strict?: boolean): boolean => {
@@ -62,7 +62,7 @@ const isValid = (number: string, strict?: boolean): boolean => {
 };
 
 const generate = (formatted?: boolean): string => {
-  let numbers = '';
+  let numbers = "";
 
   for (let i = 0; i < 9; i += 1) {
     numbers += Math.floor(Math.random() * 9);

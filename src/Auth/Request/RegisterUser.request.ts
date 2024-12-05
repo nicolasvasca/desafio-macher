@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose } from "class-transformer";
 import { IsEmail, IsEnum, IsNotEmpty, Validate } from "class-validator";
-import { IndividualTaxIdValidatorHelper } from "src/Api/Helpers/individualTaxIdValidator.helper";
+import { IndividualTaxIdValidatorHelper } from "src/Api/Helpers/IndividualTaxIdValidator.helper";
 import { TypeEnum } from "src/User/Enums/TypeEnum";
 
 export class RegisterUserRequest {
@@ -37,15 +37,14 @@ export class RegisterUserRequest {
   password: string;
 
   @ApiProperty({
-    type: Boolean,
-    description: "TaxId",
-    example: true,
-    required: true,
+    type: String,
+    description: "User taxId",
+    example: "08014360010",
   })
   @Expose()
   @IsNotEmpty()
   @Validate(IndividualTaxIdValidatorHelper)
-  taxId: boolean;
+  taxId: string;
 
   @ApiProperty({
     type: [String],

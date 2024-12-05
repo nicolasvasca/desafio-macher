@@ -6,7 +6,7 @@ export class LoginRequest {
   @ApiProperty({
     type: String,
     description: "Login ex: taxId",
-    example: "54612352041",
+    example: "08014360010",
     required: true,
   })
   @IsNotEmpty()
