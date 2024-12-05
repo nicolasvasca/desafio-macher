@@ -49,4 +49,8 @@ export class UserRepository {
     }
     return await this.repository.find({ where: query });
   }
+
+  async updateStatus(id: string, status: string): Promise<void> {
+    await this.repository.update(id, { status });
+  }
 }

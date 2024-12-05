@@ -8,16 +8,25 @@ import { FindByIdUserController } from "./Controllers/FindByIdUser.controller";
 import { FindUserTransformer } from "./Transformers/FindUser.transformer";
 import { FindUserService } from "./Services/FindUser.service";
 import { FindUserController } from "./Controllers/FindUser.controller";
+import { DeleteUserTransformer } from "./Transformers/DeleteUser.transformer";
+import { DeleteUserService } from "./Services/DeleteUser.service";
+import { DeleteUserController } from "./Controllers/DeleteUser.controller";
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
-  controllers: [FindByIdUserController, FindUserController],
+  controllers: [
+    FindByIdUserController,
+    FindUserController,
+    DeleteUserController,
+  ],
   providers: [
     UserRepository,
     FindByIdUserTransformer,
     FindByIdUserService,
     FindUserTransformer,
     FindUserService,
+    DeleteUserTransformer,
+    DeleteUserService,
   ],
   exports: [UserRepository],
 })

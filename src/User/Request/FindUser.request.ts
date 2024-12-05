@@ -21,7 +21,7 @@ export class FindUserRequest {
     type: String,
     required: false,
     description: "User type",
-    enum: TypeEnum,
+    enum: StatusEnum,
     example: "COMUM",
   })
   @IsOptional()
