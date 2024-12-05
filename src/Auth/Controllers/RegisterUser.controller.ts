@@ -9,10 +9,10 @@ import {
 } from "@nestjs/common";
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
-import { RegisterUserService } from "../Storage/RegisterUser.service";
 import { RegisterUserRequest } from "../Request/RegisterUser.request";
 import { AuthUserResponse } from "../Response/AuthUser.response";
 import { RegisterUserTransformer } from "../tranformer/RegisterUser.tranformer";
+import { RegisterUserService } from "../Services/RegisterUser.service";
 
 @Controller("auth")
 @ApiTags("Auth")
