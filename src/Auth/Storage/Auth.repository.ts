@@ -14,7 +14,7 @@ export class AuthRepository {
 
   async save(entity: Partial<AuthEntity>): Promise<Partial<AuthEntity>> {
     try {
-      const user = await this.repository.create(entity);
+      const user = await this.repository.save(entity);
 
       if (!user) {
         throw new ConflictException("Auth não criada");

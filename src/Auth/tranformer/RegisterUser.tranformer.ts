@@ -59,7 +59,7 @@ export class RegisterUserTransformer {
     return {
       id: dto.id,
       login: dto.login,
-      senha: dto.user.type,
+      senha: dto.password,
       id_usuario: userId,
     };
   }

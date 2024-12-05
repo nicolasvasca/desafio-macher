@@ -14,7 +14,7 @@ export class UserRepository {
 
   async save(entity: Partial<UserEntity>): Promise<Partial<UserEntity>> {
     try {
-      const user = await this.repository.create(entity);
+      const user = await this.repository.save(entity);
 
       if (!user) {
         throw new ConflictException("Usuário não criado");

@@ -47,6 +47,6 @@ export class LoginUserService {
     if (!(await bcrypt.compare(dto.password, authEntity.senha))) {
       throw new UnauthorizedException("Usuário ou senha inválida!");
     }
-    return authEntity.id;
+    return authEntity.id_usuario;
   }
 }
