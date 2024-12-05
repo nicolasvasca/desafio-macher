@@ -37,3 +37,6 @@ $ npm run start:prod
 # Testes unitários
 $ npm run test
 ```
+
+# Documentação
+Após iniciar a aplicação, acesse o endereço [http://localhost:3000](http://localhost:3000) para visualizar a documentação interativa do **Swagger**.
