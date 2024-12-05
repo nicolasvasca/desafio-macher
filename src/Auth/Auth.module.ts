@@ -8,8 +8,8 @@ import { JwtStrategy } from "src/Api/Security/Strategies/JWT.strategies";
 import { UserModule } from "src/User/User.module";
 import { RegisterUserController } from "./Controllers/RegisterUser.controller";
 import { LoginUserController } from "./Controllers/LoginUser.controller";
-import { RegisterUserTransformer } from "./tranformer/RegisterUser.tranformer";
-import { LoginUserTransformer } from "./tranformer/LoginUser.tranformer";
+import { RegisterUserTransformer } from "./Tranformers/RegisterUser.tranformer";
+import { LoginUserTransformer } from "./Tranformers/LoginUser.tranformer";
 import { LoginUserService } from "./Services/LoginUser.service";
 import { RegisterUserService } from "./Services/RegisterUser.service";
 

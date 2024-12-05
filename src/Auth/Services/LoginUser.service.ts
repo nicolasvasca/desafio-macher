@@ -9,7 +9,7 @@ import {
 import { AuthRepository } from "../Storage/Auth.repository";
 import { UserRepository } from "src/User/Storage/User.repository";
 import { JwtService } from "@nestjs/jwt";
-import { RegisterUserTransformer } from "../tranformer/RegisterUser.tranformer";
+import { RegisterUserTransformer } from "../Tranformers/RegisterUser.tranformer";
 import { AuthDto } from "../Dto/Auth.dto";
 import { StatusEnum } from "src/User/Enums/StatusEnum";
 

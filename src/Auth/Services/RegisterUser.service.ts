@@ -7,7 +7,7 @@ import {
 import { JwtService } from "@nestjs/jwt";
 import { AuthDto } from "../Dto/Auth.dto";
 import { UserRepository } from "src/User/Storage/User.repository";
-import { RegisterUserTransformer } from "../tranformer/RegisterUser.tranformer";
+import { RegisterUserTransformer } from "../Tranformers/RegisterUser.tranformer";
 import { UserEntity } from "src/User/Storage/Entity/User.entity";
 import { AuthRepository } from "../Storage/Auth.repository";
 

@@ -11,7 +11,7 @@ import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 import { LoginRequest } from "../Request/Login.request";
 import { LoginUserService } from "../Services/LoginUser.service";
-import { LoginUserTransformer } from "../tranformer/LoginUser.tranformer";
+import { LoginUserTransformer } from "../Tranformers/LoginUser.tranformer";
 import { AuthUserResponse } from "../Response/AuthUser.response";
 
 @Controller("auth")
