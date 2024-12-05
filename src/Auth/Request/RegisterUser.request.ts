@@ -47,7 +47,7 @@ export class RegisterUserRequest {
   taxId: string;
 
   @ApiProperty({
-    type: [String],
+    type: String,
     description: "User type",
     enum: TypeEnum,
     example: "COMUM",

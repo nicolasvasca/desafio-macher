@@ -15,6 +15,8 @@ export class FindByIdUserTransformer {
       name: dto.name,
       taxId: dto.taxId,
       email: dto.email,
+      status: dto.status,
+      type: dto.type,
       createdAt: dto.createdAt,
       updatedAt: dto.updatedAt,
     };
@@ -26,6 +28,8 @@ export class FindByIdUserTransformer {
       name: entity.nome,
       email: entity.email,
       taxId: entity.cpf,
+      status: entity.status,
+      type: entity.tipo,
       createdAt: entity.criado_em,
       updatedAt: entity.atualizado_em,
     };

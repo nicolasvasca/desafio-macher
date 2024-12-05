@@ -29,6 +29,16 @@ export class UserResponse {
   taxId?: string;
 
   @ApiProperty({
+    type: String,
+  })
+  type?: string;
+
+  @ApiProperty({
+    type: String,
+  })
+  status?: string;
+
+  @ApiProperty({
     type: Date,
   })
   createdAt?: Date;

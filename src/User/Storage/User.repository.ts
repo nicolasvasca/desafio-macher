@@ -5,6 +5,7 @@ import {
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { UserEntity } from "./Entity/User.entity";
+import { FindUserDto } from "../Dto/FindUser.dto";
 
 export class UserRepository {
   constructor(
@@ -36,5 +37,16 @@ export class UserRepository {
 
   async findByTaxId(taxId: string): Promise<Partial<UserEntity>> {
     return await this.repository.findOne({ where: { cpf: taxId } });
+  }
+
+  async find(search: FindUserDto): Promise<Partial<UserEntity>[]> {
+    const query: any = {};
+    if (search.status) {
+      query.status = search.status;
+    }
+    if (search.type) {
+      query.tipo = search.type;
+    }
+    return await this.repository.find({ where: query });
   }
 }
