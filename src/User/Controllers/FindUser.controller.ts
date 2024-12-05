@@ -46,7 +46,7 @@ export class FindUserController {
     @Res() res: Response
   ): Promise<Response> {
     try {
-      this.logger.debug("findById");
+      this.logger.debug("find");
       const dto = await this.transformer.fromApi(query);
       const userDto = await this.service.invoke(dto);
       const response: UserResponse[] = await this.transformer.toApi(userDto);
