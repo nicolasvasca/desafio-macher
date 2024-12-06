@@ -11,6 +11,7 @@ import { FindUserTransformer } from "../../../src/User/Transformers/FindUser.tra
 import { FindByIdUserService } from "../../../src/User/Services/FindByIdUser.service";
 import { DeleteUserService } from "../../../src/User/Services/DeleteUser.service";
 import { DeleteUserTransformer } from "../../../src/User/Transformers/DeleteUser.transformer";
+import MockUser from "../../Mocks/User.mock";
 
 MockEnv.mock();
 
@@ -50,5 +51,22 @@ describe("FindUserService", () => {
 
   it("should Be defined", () => {
     expect(service).toBeDefined();
+  });
+
+  it("should be return user", async () => {
+    const dto = MockUser.mockUserDto();
+    const entity = MockUser.mockUserEntity();
+    mockUserRepository.find.mockReturnValue([entity, entity]);
+    const response = await service.invoke(dto);
+    expect(response).toHaveLength(2);
+    expect(mockUserRepository.find).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be return user", async () => {
+    const dto = MockUser.mockUserDto();
+    mockUserRepository.find.mockReturnValue([]);
+    const response = await service.invoke(dto);
+    expect(response).toHaveLength(0);
+    expect(mockUserRepository.find).toHaveBeenCalledTimes(1);
   });
 });
