@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose } from "class-transformer";
-import { UserResponse } from "src/User/Response/User.response";
+import { UserResponse } from "../../User/Response/User.response";
 
 export class AuthUserResponse {
   @ApiProperty({

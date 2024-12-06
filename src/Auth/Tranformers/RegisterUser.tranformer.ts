@@ -1,9 +1,9 @@
 import * as bcrypt from "bcrypt";
 import { RegisterUserRequest } from "../Request/RegisterUser.request";
 import { AuthDto } from "../Dto/Auth.dto";
-import { StatusEnum } from "src/User/Enums/StatusEnum";
+import { StatusEnum } from "../../User/Enums/StatusEnum";
 import { AuthUserResponse } from "../Response/AuthUser.response";
-import { UserEntity } from "src/User/Storage/Entity/User.entity";
+import { UserEntity } from "../../User/Storage/Entity/User.entity";
 import { AuthEntity } from "../Storage/Entity/Auth.entity";
 import { v4 as uuidv4 } from "uuid";
 

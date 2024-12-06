@@ -16,8 +16,8 @@ import {
 } from "@nestjs/swagger";
 import { Response } from "express";
 import { UserResponse } from "../Response/User.response";
-import { JwtAuthGuard } from "src/Api/Security/Guard/JWT.guard";
-import { UserGuard } from "src/Api/Security/Guard/User.guard";
+import { JwtAuthGuard } from "../../Api/Security/Guard/JWT.guard";
+import { UserGuard } from "../../Api/Security/Guard/User.guard";
 import { FindUserService } from "../Services/FindUser.service";
 import { FindUserTransformer } from "../Transformers/FindUser.transformer";
 import { FindUserRequest } from "../Request/FindUser.request";

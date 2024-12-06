@@ -16,8 +16,8 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { Response } from "express";
-import { JwtAuthGuard } from "src/Api/Security/Guard/JWT.guard";
-import { UserAdmGuard } from "src/Api/Security/Guard/UserAdm.guard";
+import { JwtAuthGuard } from "../../Api/Security/Guard/JWT.guard";
+import { UserAdmGuard } from "../../Api/Security/Guard/UserAdm.guard";
 import { DeleteUserTransformer } from "../Transformers/DeleteUser.transformer";
 import { DeleteUserService } from "../Services/DeleteUser.service";
 

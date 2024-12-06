@@ -1,4 +1,4 @@
-import { UserDto } from "src/User/Dto/User.dto";
+import { UserDto } from "../../User/Dto/User.dto";
 
 export interface AuthDto {
   id?: string;

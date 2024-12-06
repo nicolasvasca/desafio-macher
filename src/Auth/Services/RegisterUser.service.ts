@@ -6,9 +6,9 @@ import {
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { AuthDto } from "../Dto/Auth.dto";
-import { UserRepository } from "src/User/Storage/User.repository";
+import { UserRepository } from "../../User/Storage/User.repository";
 import { RegisterUserTransformer } from "../Tranformers/RegisterUser.tranformer";
-import { UserEntity } from "src/User/Storage/Entity/User.entity";
+import { UserEntity } from "../../User/Storage/Entity/User.entity";
 import { AuthRepository } from "../Storage/Auth.repository";
 
 @Injectable()

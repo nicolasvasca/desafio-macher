@@ -1,7 +1,7 @@
 import { AuthDto } from "../Dto/Auth.dto";
 import { LoginRequest } from "../Request/Login.request";
 import { AuthUserResponse } from "../Response/AuthUser.response";
-import { UserEntity } from "src/User/Storage/Entity/User.entity";
+import { UserEntity } from "../../User/Storage/Entity/User.entity";
 
 export class LoginUserTransformer {
   public async fromApi(object: LoginRequest): Promise<AuthDto> {

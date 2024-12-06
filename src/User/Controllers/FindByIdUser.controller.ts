@@ -19,8 +19,8 @@ import { Response } from "express";
 import { FindByIdUserTransformer } from "../Transformers/FindByIdUser.transformer";
 import { FindByIdUserService } from "../Services/FindByIdUser.service";
 import { UserResponse } from "../Response/User.response";
-import { JwtAuthGuard } from "src/Api/Security/Guard/JWT.guard";
-import { UserGuard } from "src/Api/Security/Guard/User.guard";
+import { JwtAuthGuard } from "../../Api/Security/Guard/JWT.guard";
+import { UserGuard } from "../../Api/Security/Guard/User.guard";
 
 @Controller("users")
 @ApiBearerAuth()

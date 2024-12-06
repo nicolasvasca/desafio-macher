@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose } from "class-transformer";
 import { IsEmail, IsEnum, IsNotEmpty, Validate } from "class-validator";
-import { IndividualTaxIdValidatorHelper } from "src/Api/Helpers/IndividualTaxIdValidator.helper";
-import { TypeEnum } from "src/User/Enums/TypeEnum";
+import { IndividualTaxIdValidatorHelper } from "../../Api/Helpers/IndividualTaxIdValidator.helper";
+import { TypeEnum } from "../../User/Enums/TypeEnum";
 
 export class RegisterUserRequest {
   @ApiProperty({

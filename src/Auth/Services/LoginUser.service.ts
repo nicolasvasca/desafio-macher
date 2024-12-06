@@ -7,11 +7,11 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 import { AuthRepository } from "../Storage/Auth.repository";
-import { UserRepository } from "src/User/Storage/User.repository";
+import { UserRepository } from "../../User/Storage/User.repository";
 import { JwtService } from "@nestjs/jwt";
 import { RegisterUserTransformer } from "../Tranformers/RegisterUser.tranformer";
 import { AuthDto } from "../Dto/Auth.dto";
-import { StatusEnum } from "src/User/Enums/StatusEnum";
+import { StatusEnum } from "../../User/Enums/StatusEnum";
 
 @Injectable()
 export class LoginUserService {
