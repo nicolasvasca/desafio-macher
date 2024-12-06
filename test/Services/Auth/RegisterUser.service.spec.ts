@@ -55,7 +55,7 @@ describe("RegisterUserService", () => {
     mockUserRepository = MockRepository.resetMocks(mockUserRepository);
   });
 
-  it("has been defined", () => {
+  it("should Be defined", () => {
     expect(service).toBeDefined();
   });
 });

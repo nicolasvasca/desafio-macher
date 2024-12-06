@@ -48,7 +48,9 @@ describe("FindByIdUserService", () => {
     mockUserRepository = MockRepository.resetMocks(mockUserRepository);
   });
 
-  it("has been defined", () => {
+  it("should be defined", () => {
     expect(service).toBeDefined();
   });
+
+  it("")
 });

@@ -55,7 +55,7 @@ describe("RegisterUserTransformer", () => {
     mockUserRepository = MockRepository.resetMocks(mockUserRepository);
   });
 
-  it("has been defined", () => {
+  it("should Be defined", () => {
     expect(transfomer).toBeDefined();
   });
 });

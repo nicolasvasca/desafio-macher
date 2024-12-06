@@ -48,7 +48,7 @@ describe("FindUserTransformer", () => {
     mockUserRepository = MockRepository.resetMocks(mockUserRepository);
   });
 
-  it("has been defined", () => {
+  it("should Be defined", () => {
     expect(transformer).toBeDefined();
   });
 });
