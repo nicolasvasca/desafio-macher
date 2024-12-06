@@ -15,8 +15,8 @@ import { LoginUserService } from "../../../src/Auth/Services/LoginUser.service";
 
 MockEnv.mock();
 
-describe("RegisterUserService", () => {
-  let service: RegisterUserService;
+describe("LoginUserService", () => {
+  let service: LoginUserService;
   let mockAuthRepository = MockRepository.mockRepository();
   let mockUserRepository = MockRepository.mockRepository();
 
@@ -47,7 +47,7 @@ describe("RegisterUserService", () => {
       ],
     }).compile();
 
-    service = module.get<RegisterUserService>(RegisterUserService);
+    service = module.get<LoginUserService>(LoginUserService);
   });
 
   beforeEach(() => {
