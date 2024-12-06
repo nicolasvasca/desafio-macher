@@ -19,7 +19,7 @@ export class UserDeletedLogRepository {
       const user = await this.repository.save(entity);
 
       if (!user) {
-        throw new ConflictException("Usuário não criado");
+        throw new ConflictException("Log não criado");
       }
 
       return user;

@@ -10,10 +10,10 @@ export class UserDeletedLogEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ unique: true })
+  @Column({})
   id_usuario: string;
 
-  @Column({ unique: true })
+  @Column({})
   id_usuario_deletado: string;
 
   @CreateDateColumn({ name: "criado_em" })
