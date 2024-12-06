@@ -44,7 +44,7 @@ describe("DeleteUserTransformer", () => {
         UserDeletedLogRepository,
         {
           provide: getRepositoryToken(UserDeletedLogEntity),
-          useValue: mockUserRepository,
+          useValue: mockUserLogRepository,
         },
       ],
     }).compile();

@@ -46,7 +46,7 @@ describe("FindByIdUserService", () => {
         UserDeletedLogRepository,
         {
           provide: getRepositoryToken(UserDeletedLogEntity),
-          useValue: mockUserRepository,
+          useValue: mockUserLogRepository,
         },
       ],
     }).compile();

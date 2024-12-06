@@ -46,7 +46,7 @@ describe("DeleteUserService", () => {
         UserDeletedLogRepository,
         {
           provide: getRepositoryToken(UserDeletedLogEntity),
-          useValue: mockUserRepository,
+          useValue: mockUserLogRepository,
         },
       ],
     }).compile();
@@ -66,11 +66,14 @@ describe("DeleteUserService", () => {
   it("should be delete user", async () => {
     const dto = MockUser.mockDeleteUserDto();
     const entity = MockUser.mockUserEntity();
+    const logEntity = MockUser.mockUserDeletedLogEntity();
     mockUserRepository.findOne.mockReturnValue(entity);
     mockUserRepository.update.mockReturnValue(entity);
+    mockUserLogRepository.save.mockReturnValue(logEntity);
     await service.invoke(dto);
     expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockUserRepository.update).toHaveBeenCalledTimes(1);
+    expect(mockUserLogRepository.save).toHaveBeenCalledTimes(1);
   });
 
   it("should be return error if user not found", async () => {
