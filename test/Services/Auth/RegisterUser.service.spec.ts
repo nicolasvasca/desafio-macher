@@ -12,8 +12,21 @@ import { RegisterUserService } from "../../../src/Auth/Services/RegisterUser.ser
 import { RegisterUserTransformer } from "../../../src/Auth/Tranformers/RegisterUser.tranformer";
 import { LoginUserTransformer } from "../../../src/Auth/Tranformers/LoginUser.tranformer";
 import { LoginUserService } from "../../../src/Auth/Services/LoginUser.service";
+import MockAuth from "../../Mocks/Auth.mock";
+import MockUser from "../../Mocks/User.mock";
+import { ConflictException } from "@nestjs/common";
 
 MockEnv.mock();
+
+jest.mock("@nestjs/jwt", () => {
+  return {
+    JwtService: jest.fn().mockImplementation(() => {
+      return {
+        sign: jest.fn().mockReturnValue("mocked_token"), // Mock do método sign
+      };
+    }),
+  };
+});
 
 describe("RegisterUserService", () => {
   let service: RegisterUserService;
@@ -57,5 +70,27 @@ describe("RegisterUserService", () => {
 
   it("should Be defined", () => {
     expect(service).toBeDefined();
+  });
+
+  it("should be create a user", async () => {
+    const dto = MockAuth.mockAuthDto();
+    const entity = MockAuth.mockAuthEntity();
+    const userEntity = MockUser.mockUserEntity();
+    mockUserRepository.findOne.mockReturnValue(null);
+    mockUserRepository.save.mockReturnValue(userEntity);
+    mockAuthRepository.save.mockReturnValue(entity);
+    const response = await service.invoke(dto);
+    expect(response.user.id).toBe(dto.user.id);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(2);
+    expect(mockUserRepository.save).toHaveBeenCalledTimes(1);
+    expect(mockAuthRepository.save).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be return erro if find a user", async () => {
+    const dto = MockAuth.mockAuthDto();
+    const userEntity = MockUser.mockUserEntity();
+    mockUserRepository.findOne.mockReturnValue(userEntity);
+    await expect(service.invoke(dto)).rejects.toThrow(ConflictException);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
   });
 });
