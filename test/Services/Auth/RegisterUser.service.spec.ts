@@ -6,7 +6,13 @@ import { AuthEntity } from "../../../src/Auth/Storage/Entity/Auth.entity";
 import MockRepository from "../../Mocks/Repository.mock";
 import { UserEntity } from "../../../src/User/Storage/Entity/User.entity";
 import { DataSource } from "typeorm";
-process.env.JWT_SECRET = "desafio";
+import MockEnv from "../../Mocks/Env.mock";
+import { AuthRepository } from "../../../src/Auth/Storage/Auth.repository";
+import { UserRepository } from "../../../src/User/Storage/User.repository";
+import { JwtService } from "@nestjs/jwt";
+import { RegisterUserTransformer } from "../../../src/Auth/Tranformers/RegisterUser.tranformer";
+
+MockEnv.mock();
 
 describe("RegisterUserService", () => {
   let service: RegisterUserService;
@@ -15,16 +21,25 @@ describe("RegisterUserService", () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AuthModule],
       providers: [
         RegisterUserService,
+        RegisterUserTransformer,
+        AuthRepository,
+        JwtService,
         {
           provide: getRepositoryToken(AuthEntity),
           useValue: mockAuthRepository,
         },
+        UserRepository,
         {
           provide: getRepositoryToken(UserEntity),
           useValue: mockUserRepository,
+        },
+        {
+          provide: DataSource,
+          useValue: {
+            getRepository: jest.fn().mockReturnValue(mockAuthRepository),
+          },
         },
       ],
     }).compile();
