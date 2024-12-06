@@ -1,3 +1,4 @@
+import * as bcrypt from "bcrypt";
 import { Test, TestingModule } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
 import { AuthEntity } from "../../../src/Auth/Storage/Entity/Auth.entity";
@@ -12,8 +13,25 @@ import { RegisterUserService } from "../../../src/Auth/Services/RegisterUser.ser
 import { RegisterUserTransformer } from "../../../src/Auth/Tranformers/RegisterUser.tranformer";
 import { LoginUserTransformer } from "../../../src/Auth/Tranformers/LoginUser.tranformer";
 import { LoginUserService } from "../../../src/Auth/Services/LoginUser.service";
+import MockAuth from "../../Mocks/Auth.mock";
+import MockUser from "../../Mocks/User.mock";
+import { NotFoundException, UnauthorizedException } from "@nestjs/common";
 
 MockEnv.mock();
+
+jest.mock("@nestjs/jwt", () => {
+  return {
+    JwtService: jest.fn().mockImplementation(() => {
+      return {
+        sign: jest.fn().mockReturnValue("mocked_token"), // Mock do método sign
+      };
+    }),
+  };
+});
+
+jest.mock("bcrypt", () => ({
+  compare: jest.fn(),
+}));
 
 describe("LoginUserService", () => {
   let service: LoginUserService;
@@ -57,5 +75,58 @@ describe("LoginUserService", () => {
 
   it("should Be defined", () => {
     expect(service).toBeDefined();
+  });
+
+  it("should be return login", async () => {
+    const dto = MockAuth.mockAuthDto();
+    const entity = MockAuth.mockAuthEntity();
+    const userEntity = MockUser.mockUserEntity();
+    mockUserRepository.findOne.mockReturnValue(userEntity);
+    mockAuthRepository.findOne.mockReturnValue(entity);
+    (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+    const response = await service.invoke(dto);
+    expect(response.user.id).toBe(dto.user.id);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be return unatorizathion if password incorret", async () => {
+    const dto = MockAuth.mockAuthDto();
+    const entity = MockAuth.mockAuthEntity();
+    mockAuthRepository.findOne.mockReturnValue(entity);
+    (bcrypt.compare as jest.Mock).mockResolvedValue(false);
+    await expect(service.invoke(dto)).rejects.toThrow(UnauthorizedException);
+    expect(mockAuthRepository.findOne).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be return unatorizathion if login not found incorret", async () => {
+    const dto = MockAuth.mockAuthDto();
+    mockAuthRepository.findOne.mockReturnValue(null);
+    await expect(service.invoke(dto)).rejects.toThrow(UnauthorizedException);
+    expect(mockAuthRepository.findOne).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be return erro if user not found", async () => {
+    const dto = MockAuth.mockAuthDto();
+    const entity = MockAuth.mockAuthEntity();
+    mockUserRepository.findOne.mockReturnValue(null);
+    mockAuthRepository.findOne.mockReturnValue(entity);
+    (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+    await expect(service.invoke(dto)).rejects.toThrow(NotFoundException);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be return erro if user is removed", async () => {
+    const dto = MockAuth.mockAuthDto();
+    const entity = MockAuth.mockAuthEntity();
+    const userEntity = MockUser.mockUserEntity();
+    userEntity.status = "REMOVIDO";
+    mockUserRepository.findOne.mockReturnValue(userEntity);
+    mockAuthRepository.findOne.mockReturnValue(entity);
+    (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+    await expect(service.invoke(dto)).rejects.toThrow(NotFoundException);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
   });
 });
