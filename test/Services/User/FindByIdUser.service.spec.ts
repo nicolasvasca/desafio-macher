@@ -11,6 +11,8 @@ import { FindUserTransformer } from "../../../src/User/Transformers/FindUser.tra
 import { FindByIdUserService } from "../../../src/User/Services/FindByIdUser.service";
 import { DeleteUserService } from "../../../src/User/Services/DeleteUser.service";
 import { DeleteUserTransformer } from "../../../src/User/Transformers/DeleteUser.transformer";
+import MockUser from "../../Mocks/User.mock";
+import { NotFoundException } from "@nestjs/common";
 
 MockEnv.mock();
 
@@ -52,5 +54,19 @@ describe("FindByIdUserService", () => {
     expect(service).toBeDefined();
   });
 
-  it("")
+  it("should be return user", async () => {
+    const dto = MockUser.mockUserDto();
+    const entity = MockUser.mockUserEntity();
+    mockUserRepository.findOne.mockReturnValue(entity);
+    const response = await service.invoke(dto);
+    expect(response.id).toBe(dto.id);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be return error if user not found", async () => {
+    const dto = MockUser.mockUserDto();
+    mockUserRepository.findOne.mockReturnValue(null);
+    await expect(service.invoke(dto)).rejects.toThrow(NotFoundException);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+  });
 });
