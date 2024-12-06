@@ -13,12 +13,15 @@ import { DeleteUserService } from "../../../src/User/Services/DeleteUser.service
 import { DeleteUserTransformer } from "../../../src/User/Transformers/DeleteUser.transformer";
 import MockUser from "../../Mocks/User.mock";
 import { NotFoundException } from "@nestjs/common";
+import { UserDeletedLogRepository } from "../../../src/UserDeletedLog/Storage/UserDeletedLog.repository";
+import { UserDeletedLogEntity } from "../../../src/UserDeletedLog/Storage/Entity/UserDeletedLog.entity";
 
 MockEnv.mock();
 
 describe("DeleteUserService", () => {
   let service: DeleteUserService;
   let mockUserRepository = MockRepository.mockRepository();
+  let mockUserLogRepository = MockRepository.mockRepository();
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -40,6 +43,11 @@ describe("DeleteUserService", () => {
         FindByIdUserTransformer,
         DeleteUserService,
         DeleteUserTransformer,
+        UserDeletedLogRepository,
+        {
+          provide: getRepositoryToken(UserDeletedLogEntity),
+          useValue: mockUserRepository,
+        },
       ],
     }).compile();
 
@@ -48,6 +56,7 @@ describe("DeleteUserService", () => {
 
   beforeEach(() => {
     mockUserRepository = MockRepository.resetMocks(mockUserRepository);
+    mockUserLogRepository = MockRepository.resetMocks(mockUserLogRepository);
   });
 
   it("should Be defined", () => {

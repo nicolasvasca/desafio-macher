@@ -12,12 +12,15 @@ import { FindByIdUserService } from "../../../src/User/Services/FindByIdUser.ser
 import { DeleteUserService } from "../../../src/User/Services/DeleteUser.service";
 import { DeleteUserTransformer } from "../../../src/User/Transformers/DeleteUser.transformer";
 import MockUser from "../../Mocks/User.mock";
+import { UserDeletedLogRepository } from "../../../src/UserDeletedLog/Storage/UserDeletedLog.repository";
+import { UserDeletedLogEntity } from "../../../src/UserDeletedLog/Storage/Entity/UserDeletedLog.entity";
 
 MockEnv.mock();
 
 describe("FindUserService", () => {
   let service: FindUserService;
   let mockUserRepository = MockRepository.mockRepository();
+  let mockUserLogRepository = MockRepository.mockRepository();
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -39,6 +42,11 @@ describe("FindUserService", () => {
         FindByIdUserTransformer,
         DeleteUserService,
         DeleteUserTransformer,
+        UserDeletedLogRepository,
+        {
+          provide: getRepositoryToken(UserDeletedLogEntity),
+          useValue: mockUserRepository,
+        },
       ],
     }).compile();
 
@@ -47,6 +55,7 @@ describe("FindUserService", () => {
 
   beforeEach(() => {
     mockUserRepository = MockRepository.resetMocks(mockUserRepository);
+    mockUserLogRepository = MockRepository.resetMocks(mockUserLogRepository);
   });
 
   it("should Be defined", () => {
