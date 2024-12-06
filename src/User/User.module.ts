@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 import { UserRepository } from "./Storage/User.repository";
 import { UserEntity } from "./Storage/Entity/User.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
@@ -11,9 +11,13 @@ import { FindUserController } from "./Controllers/FindUser.controller";
 import { DeleteUserTransformer } from "./Transformers/DeleteUser.transformer";
 import { DeleteUserService } from "./Services/DeleteUser.service";
 import { DeleteUserController } from "./Controllers/DeleteUser.controller";
+import { UserDeletedLogModule } from "../UserDeletedLog/UserDeletedLog.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
+  imports: [
+    TypeOrmModule.forFeature([UserEntity]),
+    forwardRef(() => UserDeletedLogModule),
+  ],
   controllers: [
     FindByIdUserController,
     FindUserController,

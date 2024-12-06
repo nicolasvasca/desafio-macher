@@ -49,7 +49,8 @@ export class DeleteUserController {
   ): Promise<Response> {
     try {
       this.logger.debug("delete");
-      const dto = await this.transformer.fromApi(id);
+      const payload = req.user;
+      const dto = await this.transformer.fromApi(id, payload);
       await this.service.invoke(dto);
       this.logger.debug(
         JSON.stringify({
