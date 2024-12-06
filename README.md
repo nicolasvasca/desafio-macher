@@ -34,8 +34,11 @@ $ npm run start:prod
 # Execuntado Testes
 
 ```bash
-# Testes unitários
-$ npm run test
+# Testes unitários de serviços
+$ npm run test:services
+
+# Testes unitários de tranformadores
+$ npm run test:transformers
 ```
 
 # Documentação
