@@ -11,6 +11,8 @@ import { FindUserTransformer } from "../../../src/User/Transformers/FindUser.tra
 import { FindByIdUserService } from "../../../src/User/Services/FindByIdUser.service";
 import { DeleteUserService } from "../../../src/User/Services/DeleteUser.service";
 import { DeleteUserTransformer } from "../../../src/User/Transformers/DeleteUser.transformer";
+import MockUser from "../../Mocks/User.mock";
+import { NotFoundException } from "@nestjs/common";
 
 MockEnv.mock();
 
@@ -50,5 +52,31 @@ describe("DeleteUserService", () => {
 
   it("should Be defined", () => {
     expect(service).toBeDefined();
+  });
+
+  it("should be delete user", async () => {
+    const dto = MockUser.mockDeleteUserDto();
+    const entity = MockUser.mockUserEntity();
+    mockUserRepository.findOne.mockReturnValue(entity);
+    mockUserRepository.update.mockReturnValue(entity);
+    await service.invoke(dto);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockUserRepository.update).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be return error if user not found", async () => {
+    const dto = MockUser.mockUserDto();
+    mockUserRepository.findOne.mockReturnValue(null);
+    await expect(service.invoke(dto)).rejects.toThrow(NotFoundException);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+  });
+
+  it("should be return error if user not found if status is removed", async () => {
+    const dto = MockUser.mockUserDto();
+    const entity = MockUser.mockUserEntity();
+    entity.status = "REMOVIDO";
+    mockUserRepository.findOne.mockReturnValue(entity);
+    await expect(service.invoke(dto)).rejects.toThrow(NotFoundException);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
   });
 });

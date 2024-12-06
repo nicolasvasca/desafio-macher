@@ -1,6 +1,7 @@
 import { UserResponse } from "../../src/User/Response/User.response";
 import { UserDto } from "../../src/User/Dto/User.dto";
 import { UserEntity } from "../../src/User/Storage/Entity/User.entity";
+import { DeleteUserDto } from "../../src/User/Dto/DeleteUser.dto";
 
 export default class MockUser {
   static mockUserEntity(): UserEntity {
@@ -22,6 +23,13 @@ export default class MockUser {
       status: "ATIVO",
       type: "COMUM",
       id: "a7a52a9d-2c1d-4108-8ca1-07ce32ea71dd",
+    };
+  }
+
+  static mockDeleteUserDto(): DeleteUserDto {
+    return {
+      id: "a7a52a9d-2c1d-4108-8ca1-07ce32ea71dd",
+      userId: "a7a52a9d-2c1d-4108-8ca1-07ce32ea71dd",
     };
   }
 
