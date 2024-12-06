@@ -11,12 +11,15 @@ import { FindUserTransformer } from "../../../src/User/Transformers/FindUser.tra
 import { FindByIdUserService } from "../../../src/User/Services/FindByIdUser.service";
 import { DeleteUserService } from "../../../src/User/Services/DeleteUser.service";
 import { DeleteUserTransformer } from "../../../src/User/Transformers/DeleteUser.transformer";
+import { UserDeletedLogRepository } from "../../../src/UserDeletedLog/Storage/UserDeletedLog.repository";
+import { UserDeletedLogEntity } from "../../../src/UserDeletedLog/Storage/Entity/UserDeletedLog.entity";
 
 MockEnv.mock();
 
 describe("DeleteUserTransformer", () => {
   let transformer: DeleteUserTransformer;
   let mockUserRepository = MockRepository.mockRepository();
+  let mockUserLogRepository = MockRepository.mockRepository();
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -38,6 +41,11 @@ describe("DeleteUserTransformer", () => {
         FindByIdUserTransformer,
         DeleteUserService,
         DeleteUserTransformer,
+        UserDeletedLogRepository,
+        {
+          provide: getRepositoryToken(UserDeletedLogEntity),
+          useValue: mockUserRepository,
+        },
       ],
     }).compile();
 
@@ -46,6 +54,7 @@ describe("DeleteUserTransformer", () => {
 
   beforeEach(() => {
     mockUserRepository = MockRepository.resetMocks(mockUserRepository);
+    mockUserLogRepository = MockRepository.resetMocks(mockUserLogRepository);
   });
 
   it("should Be defined", () => {
