@@ -7,7 +7,7 @@ import {
 import { UserRepository } from "../Storage/User.repository";
 import { DeleteUserDto } from "../Dto/DeleteUser.dto";
 import { StatusEnum } from "../Enums/StatusEnum";
-import { UserDeletedLogRepository } from "src/UserDeletedLog/Storage/UserDeletedLog.repository";
+import { UserDeletedLogRepository } from "../../UserDeletedLog/Storage/UserDeletedLog.repository";
 import { DeleteUserTransformer } from "../Transformers/DeleteUser.transformer";
 
 @Injectable()
